@@ -1,0 +1,16 @@
+
+- Titre
+- Mise en situation: 
+	- Situation d'urgence, on fait quoi? on veut savoir quoi?
+- Objectifs:
+	- Evaluer l'intérêt de la PE
+	- Être en mesure de réaliser une étude statistique 
+		- propre: méthode d'évaluation utilisée
+		- objective: base de données utilisée
+- Parallèle avec les dés du casino - PE
+- Prévision d'ensemble
+- Évaluation d'une prévision d'ensemble
+	- fiabilité
+	- résolution
+	- prise en compte de l'erreur de représentativité
+- Base de données

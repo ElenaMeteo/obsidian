@@ -1,0 +1,266 @@
+{
+  "main": {
+    "id": "fb11a2d136fc63bd",
+    "type": "split",
+    "children": [
+      {
+        "id": "a7ce0313ced9cf5f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "04c26272d6e9da54",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Thèse/code/analyse_radon/Étude/Distribution des données.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Distribution des données"
+            }
+          },
+          {
+            "id": "476ca57a6b3a5828",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Thèse/code/analyse_radon/Préliminaires/Concepts nécessaires.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Concepts nécessaires"
+            }
+          },
+          {
+            "id": "7b8236f70de38f87",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Thèse/Carnet de Bord.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Carnet de Bord"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6f8498f6115e0def",
+    "type": "split",
+    "children": [
+      {
+        "id": "ad06be03a5e08410",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1c2a3151632c33c5",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": true
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "2908ce7ef2469b11",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "148660b0a9c2dead",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "6864c0054ededfac",
+    "type": "split",
+    "children": [
+      {
+        "id": "f99f4b5b9fd6a86a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "697402e05508e99f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Bienvenido.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Enlaces entrantes de Bienvenido"
+            }
+          },
+          {
+            "id": "277ff1b269cb19aa",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Bienvenido.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Enlaces salientes de Bienvenido"
+            }
+          },
+          {
+            "id": "bac8539da524a11b",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "d94e82b6e8960de2",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas las propiedades"
+            }
+          },
+          {
+            "id": "83d7dbcab460116a",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Bienvenido.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Esquema de Bienvenido"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Crear nueva base": false,
+      "sheet-plus:Create excel file": false
+    }
+  },
+  "active": "7b8236f70de38f87",
+  "lastOpenFiles": [
+    "Thèse/À faire actuellement.md",
+    "Thèse/Carnet de Bord.md",
+    "Thèse/code/analyse_radon/Préliminaires/Concepts nécessaires.md",
+    "Thèse/code/analyse_radon/Étude/Distribution des données.md",
+    "Thèse/code/analyse_radon/Étude/Présence erreur de représentativité.md",
+    "Thèse/code/analyse_radon/Étude/Paramètres de la distribution (pratique).md",
+    "Thèse/adjoint/Présentation thèse divulgative.md",
+    "Adjuntos/yAyB_40_all_2324 4.png",
+    "Adjuntos/hist_yB_all_20_2324 2.png",
+    "Adjuntos/hist_yB_all_20_2324 1.png",
+    "Adjuntos/mu_sigma_yA_gamma_2324.png",
+    "Adjuntos/dist_yB_46.29_50_2324.png",
+    "Adjuntos/dist_yB_14.5_50_2324.png",
+    "Adjuntos/dist_yB_11.77_50_2324.png",
+    "Adjuntos/dist_yB_9.55_50_2324.png",
+    "Adjuntos/dist_yB_7.32_50_2324.png",
+    "Adjuntos/dist_yB_5.38_50_2324.png",
+    "Thèse/Suivi du travail.md",
+    "Thèse/code/analyse_radon/Pilote analyse du radon.md",
+    "Thèse/code/analyse_radon/Étude/Paramètres de la distribution (bases).md",
+    "Thèse/code/analyse_radon/Préliminaires/Données.md",
+    "Thèse/code/analyse_radon/Étude/Stations de mesure.md",
+    "Maison/Aides possibles.md",
+    "Maison/Prêt.md",
+    "Thèse/adjoint/MPR.md",
+    "Maison/Prêt maison.md",
+    "Maison/Sin título.md",
+    "Thèse/adjoint/Sin título.base",
+    "Excel 2026-06-03 12.07.58.univer.md",
+    "Maison/prueba 1.numbers",
+    "Excel 2026-06-03 11.55.23.univer.md",
+    "Thèse/adjoint/Sin título 1.base",
+    "Excel 2026-06-03 11.51.05.sheet.md",
+    "Excel 2026-06-03 11.51.07.sheet.md",
+    "Excel 2026-06-03 11.50.12.sheet.md",
+    "Excel 2026-06-03 11.44.02.sheet.md",
+    "Thèse/adjoint/Sin título 1.md",
+    "Diccionario de atajos.md",
+    "Thèse/adjoint/Prévision d'ensemble.md",
+    "Maison",
+    "Thèse/code/analyse_radon/Étude",
+    "Thèse/code/analyse_radon/Préliminaires",
+    "Sin título.canvas",
+    "Adjuntos",
+    "Thèse/adjoint",
+    "Thèse/code/analyse_radon",
+    "Thèse/code"
+  ]
+}

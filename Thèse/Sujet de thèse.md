@@ -1,3 +1,4 @@
+#nonmodifiable
 ## Propagation multi-incertitudes dans la chaîne de modélisation du transport atmosphérique des polluants issus d’accidents industriels ou nucléaires
 
 Lors d’un accident industriel ou nucléaire, la modélisation du transport atmosphérique des polluants émis joue un rôle central pour la prise de décision en situation de crise. Ces évaluations sont aujourd’hui obtenues par le couplage de modèles météorologiques, développés et opérés par Météo-France, avec des outils de simulation de la dispersion atmosphérique développés et mis en œuvre par l’ASNR. Les résultats issus de cette chaîne de modélisation constituent un élément clé pour orienter les mesures de protection des populations exposées.
