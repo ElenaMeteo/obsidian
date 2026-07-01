@@ -4,53 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "a7ce0313ced9cf5f",
+        "id": "ff73b3042ca3d0e3",
         "type": "tabs",
         "children": [
           {
-            "id": "04c26272d6e9da54",
+            "id": "7eee51a153798662",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Thèse/code/analyse_radon/Étude/Distribution des données.md",
+                "file": "Thèse/Sujet de thèse.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Distribution des données"
-            }
-          },
-          {
-            "id": "476ca57a6b3a5828",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Thèse/code/analyse_radon/Préliminaires/Concepts nécessaires.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Concepts nécessaires"
-            }
-          },
-          {
-            "id": "7b8236f70de38f87",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Thèse/Carnet de Bord.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Carnet de Bord"
+              "title": "Sujet de thèse"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -107,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 574.5
   },
   "right": {
     "id": "6864c0054ededfac",
@@ -213,30 +184,37 @@
       "sheet-plus:Create excel file": false
     }
   },
-  "active": "7b8236f70de38f87",
+  "active": "7eee51a153798662",
   "lastOpenFiles": [
     "Thèse/À faire actuellement.md",
-    "Thèse/Carnet de Bord.md",
-    "Thèse/code/analyse_radon/Préliminaires/Concepts nécessaires.md",
-    "Thèse/code/analyse_radon/Étude/Distribution des données.md",
-    "Thèse/code/analyse_radon/Étude/Présence erreur de représentativité.md",
-    "Thèse/code/analyse_radon/Étude/Paramètres de la distribution (pratique).md",
-    "Thèse/adjoint/Présentation thèse divulgative.md",
-    "Adjuntos/yAyB_40_all_2324 4.png",
-    "Adjuntos/hist_yB_all_20_2324 2.png",
-    "Adjuntos/hist_yB_all_20_2324 1.png",
-    "Adjuntos/mu_sigma_yA_gamma_2324.png",
-    "Adjuntos/dist_yB_46.29_50_2324.png",
-    "Adjuntos/dist_yB_14.5_50_2324.png",
-    "Adjuntos/dist_yB_11.77_50_2324.png",
-    "Adjuntos/dist_yB_9.55_50_2324.png",
-    "Adjuntos/dist_yB_7.32_50_2324.png",
-    "Adjuntos/dist_yB_5.38_50_2324.png",
+    "Thèse/Sujet de thèse.md",
     "Thèse/Suivi du travail.md",
-    "Thèse/code/analyse_radon/Pilote analyse du radon.md",
-    "Thèse/code/analyse_radon/Étude/Paramètres de la distribution (bases).md",
+    "Thèse/code/analyse_radon/Étude/All 23-24/Paramètres de la distribution (bases).md",
+    "Thèse/code/analyse_radon/Étude/All 23-24/Distribution théorique des données (2023 et 2024).md",
+    "Thèse/code/analyse_radon/Étude/All 23-24/Formules mu et sigma (yA).md",
+    "Thèse/Projet naTech.md",
+    "Thèse/Carnet de Bord.md",
     "Thèse/code/analyse_radon/Préliminaires/Données.md",
-    "Thèse/code/analyse_radon/Étude/Stations de mesure.md",
+    "Thèse/code/analyse_radon/Préliminaires/Concepts nécessaires.md",
+    "Thèse/code/analyse_radon/Étude/Juin 2025/Stations de mesure.md",
+    "Thèse/adjoint/HOY.md",
+    "Thèse/bibliographie/Accounting for representativeness in the verification of ensemble forecasts.md",
+    "Thèse/adjoint/Présentation thèse divulgative.md",
+    "Thèse/code/analyse_radon/Étude/All 23-24",
+    "Adjuntos/dist_yB_all20q_eval_lognorm.png",
+    "Adjuntos/dist_yB_all20q_eval_gamma.png",
+    "Adjuntos/dist_yB_all10q_eval_lognorm.png",
+    "Adjuntos/dist_yB_all10q_eval_gamma.png",
+    "Thèse/code/analyse_radon/Étude/Juin 2025/Distribution théorique des données (juin 2025).md",
+    "Adjuntos/dist_yB_all10q_eval 1.png",
+    "Adjuntos/dist_yB_all4q_eval 1.png",
+    "Adjuntos/dist_yB_all4q_eval.png",
+    "Adjuntos/dist_yB_all10q_eval.png",
+    "Adjuntos/dist_yB_all10q 2.png",
+    "Adjuntos/dist_yB_all10q 1.png",
+    "Thèse/code/analyse_radon/Étude/Juin 2025/Présence erreur de représentativité.md",
+    "Thèse/code/analyse_radon/Étude/Juin 2025",
+    "Thèse/code/analyse_radon/Pilote analyse du radon.md",
     "Maison/Aides possibles.md",
     "Maison/Prêt.md",
     "Thèse/adjoint/MPR.md",
@@ -249,18 +227,11 @@
     "Thèse/adjoint/Sin título 1.base",
     "Excel 2026-06-03 11.51.05.sheet.md",
     "Excel 2026-06-03 11.51.07.sheet.md",
-    "Excel 2026-06-03 11.50.12.sheet.md",
-    "Excel 2026-06-03 11.44.02.sheet.md",
-    "Thèse/adjoint/Sin título 1.md",
-    "Diccionario de atajos.md",
-    "Thèse/adjoint/Prévision d'ensemble.md",
     "Maison",
     "Thèse/code/analyse_radon/Étude",
     "Thèse/code/analyse_radon/Préliminaires",
     "Sin título.canvas",
     "Adjuntos",
-    "Thèse/adjoint",
-    "Thèse/code/analyse_radon",
-    "Thèse/code"
+    "Thèse/adjoint"
   ]
 }
