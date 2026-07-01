@@ -1,0 +1,6 @@
+- [ ] Déclarer mission
+- [ ] Envoyer enveloppe LaPoste
+- [ ] Factures airbnb ASNR
+- [ ] Organiser mon code
+- [x] Logement juillet 2026
+- [ ] email a Irene

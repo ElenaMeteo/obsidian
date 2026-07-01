@@ -1,4 +1,4 @@
-Notre objectif avec cette partie est de déterminer les paramètres de la [[Distribution des données]] que nous traitons en fonction du maillage. Pour le faire, la méthode exposée sur [[Accounting for representativeness in the verification of ensemble forecasts]] est mise en place. 
+Notre objectif avec cette partie est de déterminer les paramètres de la [[Distribution théorique des données (juin 2025)]] que nous traitons en fonction du maillage. Pour le faire, la méthode exposée sur [[Accounting for representativeness in the verification of ensemble forecasts]] est mise en place. 
 
 --- 
 
@@ -8,7 +8,7 @@ Dans ce document on pose les bases de notre méthode pour estimer les paramètre
 
 ### Choix de la loi 
 
-Après l'analyse statistique faite sur la [[Distribution des données]], nous avons quelques candidats pour établir la loi suivie par les données de Radon 222. Celles qui s'y ajustent le mieux sont la loi *gamma* et la loi *beta*. 
+Après l'analyse statistique faite sur la [[Distribution théorique des données (juin 2025)]], nous avons quelques candidats pour établir la loi suivie par les données de Radon 222. Celles qui s'y ajustent le mieux sont la loi *gamma* et la loi *beta*. 
 La loi gamma est plus précise mais un peu moins stable que beta. Le choix va aussi dépendre de la difficulté du fitting des paramètres. Si y en a une beaucoup plus simple on va la favoriser. Ça dépend aussi des études faites précédemment.
 Dans l'article "[[Accounting for representativeness in the verification of ensemble forecasts]]", Zied attribue la loi gamma au cas de la pluie. En sachant qu'on se base sur cet article c'est possible qu'on privilégie cette-là, étant les raisons scientifiques legitimes.
 
@@ -35,13 +35,18 @@ où $F_k$ est la distribution cumulée de la fonction CSGD.
 Le modèle paramétrique auquel on va s'adapter est défini par les équations et paramètres suivants: $$\mu_B(y_A) = \alpha_0 +\alpha_1y_A,$$$$\sigma_B(y_A) = \beta_0 +\beta_1 (y_A)^{1/2},$$ Avec une initialisation telle que: 
 $$\alpha_0=0.1,\ \alpha_1=1,\ \beta_0=0.1,\ \beta_1=1$$
 ---
-### Méthodes pour trouver les paramètres
+### Méthode pour trouver les paramètres
 
-- [ ] Librerie de python: `from scipy.optimize import curve_fit`
-- [ ] Petite ia
+- Garder les valeurs de toutes les stations d'une même maille dès qu'on observe un pic. Ce correspond aux yB.
+- Faire scatter-plot avec yB en fonction de yA.
+- Tracer la distribution des yB en fonction d'une partie des yA qui sera déterminée par les quantiles qui séparent les valeurs yA. On aura donc une distribution pour chaque quantile.
+- Faire un fit pour chaque quantile de yA avec ses yB correspondants. Cela nous donnera un mu et un sigma par quantile de yA. On peut décider le numéro de quantiles qu'on va faire.
+- Tracer mu et sigma en fonction de yA (moyen). Est ce qu'on peut faire une régression?
+- Dans notre article c'était linéaire. On va essayer de faire pareil.
 
-Les paramètres sont initialisés.
-On part d'une valeur de $y_A$ pour déterminer $\mu$ et $\sigma$. Avec cela on aura une loi gamma. On tire au sort sur cette loi et on évalue avec le [[Concepts nécessaires#Score CRPS|score CRPS]]. Une fois on a les résultats, on recommence avec des nouveaux paramètres. 
+Pour voir la partie pratique de ce processus, consulter [[Formules mu et sigma (yA)]].
+
+
 
 
 

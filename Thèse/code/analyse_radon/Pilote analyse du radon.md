@@ -8,7 +8,7 @@ Ce projet est inscrit dans le cadre du [[Projet naTech]], qui vise à améliorer
 
 - [[Données]] étudiées
 - Étude:
-	- [[Distribution des données]]
+	- [[Distribution théorique des données (juin 2025)]]
 		- Distribution observations par département
 		- Fitting avec distributions théoriques
 		- Distribution observations toute la France

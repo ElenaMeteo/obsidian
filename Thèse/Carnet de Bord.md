@@ -1,6 +1,6 @@
 ### **06/05/2026**
 Réunion de mise au point. Le sujet était la façon de prendre en compte l'erreur de représentativité dans le score qui va évaluer notre prévision. Les paramètres d'une loi qui va modéliser nos événements, vont dépendre de la longueur de la maille. 
-Remarque principale: **Il n'y a pas de modélisation du bruit de fond ce qui veut dire que ça ne fait pas sens de modéliser le l'erreur de représentativité quand il n'y a pas d'événement** (dépassement d'un pic défini). Notre approche doit changer. On va garder les lignes de données qui contiennent au moins un événement detecté et on va faire notre étude avec ça. 
+Remarque principale: **Il n'y a pas de modélisation du bruit de fond ce qui veut dire que ça ne fait pas sens de modéliser l'erreur de représentativité quand il n'y a pas d'événement** (dépassement d'un pic défini). Notre approche doit changer. On va garder les lignes de données qui contiennent au moins un événement detecté et on va faire notre étude avec ça. 
 
 Il faut refaire toute la partie d'analyse de radon (juin 2025) avec des différentes données: Il s'agit d'augmenter le délai parce qu'on va beaucoup filtrer les données. 
 
@@ -71,8 +71,8 @@ Présentation mardi: présentation vulgarisation
 Essai de séparation du main: structure_donnees.py et jsondict_23_24.json
 
 ### 15/06/2026
-- [x] Validation données: yA trop basses
-- [x] Séparation de certaines parties du programme pour le rendre plus rapide
+- [ ] Validation données: yA trop basses
+- [ ] Séparation de certaines parties du programme pour le rendre plus rapide
 - [ ] Corriger histogramme: quantiles
 - [ ] Présentation pour demain
 Je me suis rendue compte que en fait la lecture de tous les documents que je faisais au début (et que j¡ai passé à structure_donnees.py) ne servait à rien parce que les lectures se refaisaient dans un deuxième temps quand les stations ont été filtrées par le maillage.
@@ -88,11 +88,11 @@ Presentation
 - Application natech une fois qu'on a valide: utilisation, produit, demostration
 	
 
-### 16/06
+### 16/06/2026
 Présentation événement natech
 distribution des yB en fonction des yA par quantiles
 
-### 17/06 
+### 17/06/2026
 Réunion périodique avec les tuteurs.
 	- Fitting summary all peaks distribution: gamma
 	- On part de cette distribution
@@ -108,6 +108,45 @@ Réunion périodique avec les tuteurs.
 
 - Est ce qu'il y a une influence sur la sensibilité du résultat à faire un backup toutes les 6h ou 24h au niveau des résultats de LDX?
 
+### 18/06/2026
+Les résultats des distributions montrent un double pic sur les premiers quantiles. Il faut voir si on peut traiter ça mathématiquement. Il y a moyen de définir des pdf par intervalles mais il faut voir s'il est possible de le faire unifier afin d'obtenir une seule moyenne et un seul écart-type par yA. D'un autre côté on se demande si la remarque de la réunion du [[Carnet de Bord#**06/05/2026|06/05/2026]] est vraiment pertinente dans notre situation: on réalise juste un post-traîtement,  on utilise pas le modèle quand on détermine les paramètres.
 
+### 19/06/2026
+En vue du changement de situation on doit remettre en ordre les documents Obsidian, refaire une étude statistique suffisamment solide comme pour justifier nos choix de fitting et réaliser le fitting. Il se trouve que en ayant déjà essayé un fitting on retrouve des problèmes de cohérence avec les données et donc il faut un peu plus approfondir.
 
+Après le travail d'aujourd'hui plusieurs questions se posent pour la suite. 
+- Utilisation du filtrage des données? Cela va sans doute influencer la bi-modalité des distributions obtenues par quantile.
+- Si on garde ces données: fitting simple où on essaye le double. 
+	- Pour le simple, on pourrait faire la régression avec les quantiles non conflictuels et valider (ou pas) avec le reste en établissant les paramètres manuellement à travers la régression
+	- Pour le complexe, il faudrait trouver un moyen de définir une nouvelle distribution et que python fasse le fitting avec. Il est possible de trouver une formule plus ou moins adéquate mais c'est le fitting avec un seul paramètre qui m'inquiète le plus: en effet, si on obtient plusieurs paramètres par quantile, on y trouve pas son sens. 
+Par rapport à la possibilité de combinaison de deux distributions: le but c'est donc de sortir deux régressions et d'établir une loi combinée avec les paramètres issus de ces deux régressions et un paramètre supplémentaire pour les poids de chacune. 
 
+## 29/06/2026
+Après mon passage à Paris, on a LDX sur les ordinateurs prêts à fonctionner. Pour faire tourner ce qu'il nous faut, il nous faut des **fichiers de "mise au point" de radon** (pour pas démarrer une simulation en supposant qu'il y a 0 radon dans l'atmosphère). 
+D'une autre part, par rapport aux données: on veut pouvoir faire un fit le plus correcte possible: Laurent a fait un essai avec le "double fitting" en le comparant à un fitting simple. Le double est beaucoup plus performant mais le fitting est "manuel". Il faut qu'on compare les résultats: **avec/sans filtre de d'observations et avec les deux fittings.** 
+Pour comparer tout ça, ça commence à être compliqué de le gérer avec le code. On commence un projet d'interface. 
+
+J'ai besoin de réorganiser mon code par paquets.
+1- Données: Il faut 
+	- une librairie qui contient les fonctions de filtrage de données et de mise en forme. Il faut que tous les fichiers aient le même format
+	- un code qui gère le passage par ces fonctions des données brutes
+	À la fin il faut obtenir un fichier de données complètes et un autre filtré pour chaque base essayée.
+2- Projets: il faut
+	- Séparer le main par projets: y a des choses qu'on fait une fois et on refait plus. 
+
+## 01/07/2026
+Choses à faire actuellement:
+- Gagner l'autonomie d'utiliser LDX
+	- [ ] Comprendre "restart"
+	- [ ] Obtenir fichiers nécessaires pour le faire
+- [ ] Restructurer Obsidian afin d'avoir une lecture simplifiée
+-  Restructurer le code
+	- [ ] Séparer en plus petits bouts
+	- [ ] Le rendre souple: 
+		- [ ] mettre un même format de base de données 
+		- [ ] créer un fichier avec les paramètres principaux et le relier aux produits
+- Avancer sur l'analyse:
+	- [ ] Être en mesure de comparer les densités simples et doubles
+	- [ ] Être en mesure de comparer les densités avec données complètes vs. filtrées
+	- [ ] En sortir une conclusion
+	- [ ] Aller jusqu'au bout de l'analyse

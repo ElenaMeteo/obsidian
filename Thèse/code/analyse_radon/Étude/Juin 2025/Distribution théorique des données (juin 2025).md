@@ -1,5 +1,5 @@
 #python #distribution #fitting 
-L'objectif de cette partie de l'exercice est de tracer les distributions de pics gamma observés dans chaque département et y attribuer une distribution théorique que s'y ajuste avec les paramètres optimaux. 
+L'objectif de cette partie de l'exercice est de tracer les distributions de pics gamma observés dans chaque département et y attribuer une distribution théorique qui s'y ajuste avec les paramètres optimaux. 
 
 Les [[Données]] utilisées sont filtrées par nombre de stations par département. Afin de limiter la convergence du système vers des solutions singulières, nous avons besoin d'une certaine quantité de données. Nous regardons donc les départements qui [[Données#Filtre 5 ou plus| contiennent 5 stations de mesure minimum]]. 
 
@@ -65,6 +65,7 @@ D'une autre part, avec le tableau qui suit on regarde quelles sont les meilleure
 | `weibull_min`       | 7 (25%)  | 7 (25%)  | inf                                 | inf                                | 0            |
 | `gamma`             | 25 (75%) | 25 (75%) | 0.27                                | 0.27                               | 2 (6%)       |
 | `beta`              | 1        | 1        | 0.17                                | 0.2                                | 0            |
+|                     |          |          |                                     |                                    |              |
 On voit que `gamma` "absorbe" les meilleurs de `weibull_max` quand on enlève ce choix. Cela pourrait s'interpréter comme `gamma` étant le second meilleur choix. On voit aussi que `gamma`est meilleure que `weibull_min` dans le $75\%$ des choix. Néanmoins, `gamma`étant plus stable que `weibull_max`, a quand-même un $6\%$ de cas où on obtient une approximation dégénérée. D'un autre côté, `beta`n'est jamais la meilleure mais par les écarts moyens à la meilleure on en déduit qu'elle est vachement proche de gamma, et ne donne pas des solutions dégénérées.
 
 --- 
