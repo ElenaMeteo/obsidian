@@ -11,14 +11,10 @@
             "id": "7eee51a153798662",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Thèse/Sujet de thèse.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Sujet de thèse"
+              "title": "Nueva pestaña"
             }
           }
         ]
@@ -78,7 +74,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 574.5
+    "width": 421.5
   },
   "right": {
     "id": "6864c0054ededfac",
@@ -184,7 +180,7 @@
       "sheet-plus:Create excel file": false
     }
   },
-  "active": "7eee51a153798662",
+  "active": "1c2a3151632c33c5",
   "lastOpenFiles": [
     "Thèse/À faire actuellement.md",
     "Thèse/Sujet de thèse.md",
