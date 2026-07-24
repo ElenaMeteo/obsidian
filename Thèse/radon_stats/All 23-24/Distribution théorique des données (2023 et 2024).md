@@ -6,7 +6,7 @@ Les [[Données]] utilisées sont filtrées par nombre de stations par maille, le
 ---
 ## Paramètres initiaux
 
-Cette analyse est réalisé en partant de $\Delta = 40km$ et en séparant nos données en 4 et 10 quantiles. 
+Cette analyse est réalisé en partant de $\Delta = 40km$ et en séparant nos données en 4, 10 et 20 quantiles. 
 
 ---
 ## Fitting avec une distribution
@@ -70,3 +70,16 @@ où les paramètres $(\alpha_{i,1}, \alpha_{i,2})$ sont déterminés à partir d
 4. En sortir les paramètres concernés
 5. Tracer les valeurs et faire les régressions linéaires
 6. Déterminer les paramètres issus des régressions
+
+---
+## Résultats fitting avec deux distributions
+
+Dans cette partie on va voir les résultats du fitting avec deux distributions, on va les comparer aux résultats qu'on a déjà et on va conclure sur nos meilleures possibilités. 
+
+
+---
+## Base de données: filtrée ou pas?
+
+On va voir ce qu'il se passe quand on utilise la totalité de la base de données sans nécessairement la passer par le "filtre d'observations".
+
+

@@ -150,3 +150,41 @@ Choses à faire actuellement:
 	- [ ] Être en mesure de comparer les densités avec données complètes vs. filtrées
 	- [ ] En sortir une conclusion
 	- [ ] Aller jusqu'au bout de l'analyse
+
+## 02/07/2026
+Aujourd'hui j'ai commencé à restructurer le code en classes. cela le simplifie beaucoup et probablement je pourrais tout faire avec des classes. Tout n'est pas encore parfait. Pour l'instant il y a 3 documents: fitting_classe.py qui contient les classes pour faire le fitting (simple et double) - pour celui la il va falloir que je mette correctement la structure en vue des différences de données entre le simple et le double -, graphs_classe.py qui contient les classes qui tracent les graphiques (pas encore decide la façon dont je vais structurer cette la) et scores_classe.py qui contient la classe calculant les scores mais je sais pas trop encore si ce format là est pratique pour ça.
+J'ai prévu d'en faire une autre pour gèrer les données (lecture de tous les documents csv) et les mettre dans un format unifié pour pas avoir de soucis d'adaptation
+Laurent m'a envoyé un programme de travail pour l'été. Pour celui-là il est vraiment important que j'arrive à faire un code souple avec les classes. 
+
+
+## 15/07/2026
+Retour des vacances. On reprend la restructure du code par classes.
+Pour s'y remettre: reprenons du début.
+- [x] Données: format adéquat
+- [x] Fitting: bon format paramètres
+Je dois décider maintenant la méthode d'affichage que je veux utiliser. J'ai 3 graphiques par quantile donc une fenêtre avec les 3 graphiques serait pertinente. Et je dois aussi afficher toutes les fenêtres au même moment. 
+
+## 20/07/2026
+Il faut qu'on se dépêche et qu'avant le 14 août on ait les formules du mu et sigma qu'on veut utiliser.
+
+## 21/07/2026
+La méthode simple manuelle donne beaucoup de problèmes avec certaines distributions. On pourrait peut être les régler mais on va d'abord fiare en sorte que le reste des choses marche. 
+
+Aujourd'hui j'ai réussi a faire les fittings et les graphques pour les methodes simple automatique et double. Comme on avait deja remarque, la méthode automatique explose à des certains quantiles. Maintenant il faut décider un certain nombre de choses:
+- Quelle distribution va-t-on utiliser?
+- Avec quelle méthode allons nous le faire?
+- Combien de quantiles?
+- Quelle maille?
+Pour cela il faut faire une étude statistique
+Mais avant, il faut debugger la méthode simple manuelle
+
+# 22/07/2026
+Réunion de mise au point:
+Il ne faut pas trop passer du temps sur le fitting, il faut avancer.
+Choisir un critère de décision. 
+Refaire les graphiques avec toutes les observations (sans passer par le filtrage de présence de pic).
+Modélisation du bruit de fond en cours: ça implique quoi? Entre en jeu au post-traîtement.
+
+Premier chapitre de la thèse d'Irène à lire pour la variabilité sous-maille. 
+
+Objectif: au moins teste sur une journée les fichiers des membres et évaluation avant la fin du mois d'août.

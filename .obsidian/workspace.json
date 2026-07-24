@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "ff73b3042ca3d0e3",
+        "id": "eaf72e3c0bb1b794",
         "type": "tabs",
         "children": [
           {
-            "id": "7eee51a153798662",
+            "id": "c54f94c724e4950e",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Thèse/radon_stats/All 23-24/Distribution de nos Données Radon en Fonction du Maillage.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nueva pestaña"
+              "title": "Distribution de nos Données Radon en Fonction du Maillage"
             }
           }
         ]
@@ -74,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 421.5
+    "width": 284.5
   },
   "right": {
     "id": "6864c0054ededfac",
@@ -180,8 +184,19 @@
       "sheet-plus:Create excel file": false
     }
   },
-  "active": "1c2a3151632c33c5",
+  "active": "c54f94c724e4950e",
   "lastOpenFiles": [
+    "Thèse/radon_stats/All 23-24/Paramètres de la distribution (bases).md",
+    "Thèse/radon_stats/All 23-24/Formules mu et sigma (yA).md",
+    "Thèse/radon_stats/All 23-24/Distribution théorique des données (2023 et 2024).md",
+    "Thèse/radon_stats/All 23-24/Distribution de nos Données Radon en Fonction du Maillage.md",
+    "Thèse/radon_stats/Pilote analyse du radon.md",
+    "Thèse/radon_stats/Juin 2025/Présence erreur de représentativité.md",
+    "Thèse/radon_stats/Juin 2025/Distribution théorique des données (juin 2025).md",
+    "Adjuntos/Images - Ch. Erreur Obs.png",
+    "Thèse/documentation_code/Organisation données.md",
+    "Thèse/documentation_code",
+    "Thèse/suivi/Carnet de Bord.md",
     "Thèse/À faire actuellement.md",
     "Thèse/Sujet de thèse.md",
     "Thèse/Suivi du travail.md",
@@ -207,27 +222,16 @@
     "Adjuntos/dist_yB_all4q_eval.png",
     "Adjuntos/dist_yB_all10q_eval.png",
     "Adjuntos/dist_yB_all10q 2.png",
-    "Adjuntos/dist_yB_all10q 1.png",
     "Thèse/code/analyse_radon/Étude/Juin 2025/Présence erreur de représentativité.md",
     "Thèse/code/analyse_radon/Étude/Juin 2025",
     "Thèse/code/analyse_radon/Pilote analyse du radon.md",
-    "Maison/Aides possibles.md",
-    "Maison/Prêt.md",
-    "Thèse/adjoint/MPR.md",
-    "Maison/Prêt maison.md",
-    "Maison/Sin título.md",
     "Thèse/adjoint/Sin título.base",
-    "Excel 2026-06-03 12.07.58.univer.md",
     "Maison/prueba 1.numbers",
-    "Excel 2026-06-03 11.55.23.univer.md",
     "Thèse/adjoint/Sin título 1.base",
-    "Excel 2026-06-03 11.51.05.sheet.md",
-    "Excel 2026-06-03 11.51.07.sheet.md",
     "Maison",
     "Thèse/code/analyse_radon/Étude",
     "Thèse/code/analyse_radon/Préliminaires",
     "Sin título.canvas",
-    "Adjuntos",
-    "Thèse/adjoint"
+    "Adjuntos"
   ]
 }

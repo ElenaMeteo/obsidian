@@ -4,7 +4,8 @@ Dans ce document on trouve l'étude pratique qui a été faite avec la méthode
 
 ---
 ### Détermination des yB et yA
-Cela est fait à partir de la théorie écrite sur [[Présence erreur de représentativité]], mais en mettant un filtre additionnel. Le travail sera réalisé avec les grilles qui on cinq stations ou plus. Les stations contenues dans ces grilles seront regardées en paralléle. Les observations des stations seront sélectionnées seulement s'il est déterminé qu'au moins une d'elles a observé un pic. 
+
+Cela est fait à partir de la théorie écrite sur [[Présence erreur de représentativité]], mais en mettant un filtre additionnel. Le travail sera réalisé avec les grilles qui ont cinq stations ou plus. Les stations contenues dans ces grilles seront regardées en parallèle. Les observations des stations seront sélectionnées seulement s'il est déterminé qu'au moins une d'elles a observé un pic. 
 Ce cas se donne quand la station a une observation majeure que notre seuil où quand une simulation a été faite par dessus de `seuil + tol_simu` et que l'observation est par dessus de `seuil - tol_obs`. 
 Dans un premier temps, les lignes contenant au moins une valeur `NaN`ont été supprimées. 
 
@@ -90,6 +91,16 @@ Il est aussi possible de mélanger des quantiles et observer ce qu'il se passe, 
 Cela va dépendre aussi de la décision prise auprès du filtrage des données. 
 
 L'étude réalisée afin de prendre la décision auprès de la distribution théorique et le maillage utilisés : [[Distribution théorique des données (2023 et 2024)]]
+
+---
+### Quel fitting?
+
+On retrouve plusiers possibilités de fitting: simple automatique, simple manuelle ou double. Dans cette partie on va voir une comparaison des 3 résultats pour chaque quantile. Voici les charactéristiques théoriques de chacune:
+- La simple automatique: la plus facile à faire, déjà programmée mais explose à des certains endroits. On a quand-même une possible solution pour les endroits où ça explose en forme d'interpolation des paramètres qui vont définir le fitting (shape, loc, scale).
+- La simple manuelle: plus facile de corriger quand ça explose, mais on ne sait pas à quel point elle est précise par rapport à l'automatique. 
+- La double: plus complexe, plus de paramètres et à voir si ça marche partout, mais potentiellement beaucoup plus précise.
+
+
 
 ---
 ### Paramètres de base déterminés
