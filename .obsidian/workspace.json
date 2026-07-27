@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Thèse/radon_stats/All 23-24/Distribution de nos Données Radon en Fonction du Maillage.md",
+                "file": "Thèse/radon_stats/All 23-24/Erreur de Représentativité lors de l'Évaluation.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Distribution de nos Données Radon en Fonction du Maillage"
+              "title": "Erreur de Représentativité lors de l'Évaluation"
             }
           }
         ]
@@ -186,10 +186,14 @@
   },
   "active": "c54f94c724e4950e",
   "lastOpenFiles": [
+    "Adjuntos/2.png",
+    "Thèse/bibliographie/Accounting for representativeness in the verification of ensemble forecasts.md",
+    "Thèse/radon_stats/All 23-24/Erreur de Représentativité lors de l'Évaluation.md",
+    "Diccionario de atajos.md",
     "Thèse/radon_stats/All 23-24/Paramètres de la distribution (bases).md",
-    "Thèse/radon_stats/All 23-24/Formules mu et sigma (yA).md",
     "Thèse/radon_stats/All 23-24/Distribution théorique des données (2023 et 2024).md",
-    "Thèse/radon_stats/All 23-24/Distribution de nos Données Radon en Fonction du Maillage.md",
+    "Thèse/radon_stats/All 23-24/Formules mu et sigma (yA).md",
+    "Thèse/bibliographie/Accounting for representativeness in the verification of ensemble precipitation forecasts.md",
     "Thèse/radon_stats/Pilote analyse du radon.md",
     "Thèse/radon_stats/Juin 2025/Présence erreur de représentativité.md",
     "Thèse/radon_stats/Juin 2025/Distribution théorique des données (juin 2025).md",
@@ -209,22 +213,18 @@
     "Thèse/code/analyse_radon/Préliminaires/Concepts nécessaires.md",
     "Thèse/code/analyse_radon/Étude/Juin 2025/Stations de mesure.md",
     "Thèse/adjoint/HOY.md",
-    "Thèse/bibliographie/Accounting for representativeness in the verification of ensemble forecasts.md",
     "Thèse/adjoint/Présentation thèse divulgative.md",
     "Thèse/code/analyse_radon/Étude/All 23-24",
     "Adjuntos/dist_yB_all20q_eval_lognorm.png",
     "Adjuntos/dist_yB_all20q_eval_gamma.png",
     "Adjuntos/dist_yB_all10q_eval_lognorm.png",
     "Adjuntos/dist_yB_all10q_eval_gamma.png",
-    "Thèse/code/analyse_radon/Étude/Juin 2025/Distribution théorique des données (juin 2025).md",
     "Adjuntos/dist_yB_all10q_eval 1.png",
     "Adjuntos/dist_yB_all4q_eval 1.png",
     "Adjuntos/dist_yB_all4q_eval.png",
     "Adjuntos/dist_yB_all10q_eval.png",
     "Adjuntos/dist_yB_all10q 2.png",
-    "Thèse/code/analyse_radon/Étude/Juin 2025/Présence erreur de représentativité.md",
     "Thèse/code/analyse_radon/Étude/Juin 2025",
-    "Thèse/code/analyse_radon/Pilote analyse du radon.md",
     "Thèse/adjoint/Sin título.base",
     "Maison/prueba 1.numbers",
     "Thèse/adjoint/Sin título 1.base",
