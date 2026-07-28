@@ -169,6 +169,24 @@ Dans le tableau on voit que, le meilleur compromis est $\Delta=40km$ avec $27$ c
 
 On établit donc pour la suite $\Delta =40km$, jusqu'à préciser autrement. 
 # Traitement des Données
+
+## Erreur sur nos données
+
+Une fois les données filtrées, on peut voir à quoi les $y_B$ ressemblent par rapport à ses correspondant $y_A$. Voici un graphique où nous avons mis en ordonnée tous les $y_B$ d'une même station et en abscisse, sa correspondante valeur $y_A$:
+
+![[yAyB_40_all_2324 4.png|382]]
+
+Ce graphique nous donne une idée de l'erreur de représentativité présent dans nos données. Une représentation idéale maintiendrait les points bleus sur la diagonale noire. On voit bien que c'est loin d'être la cas avec l'échelle du graphique. 
+
+## Quantiles de $y_A$
+
+Pour pouvoir construire une fonction affine définissant le comportement de la moyenne $\mu$ et de l'écart-type $\sigma$ en dépendant de $y_A$ comme décrit sur la partie [[Erreur de Représentativité lors de l'Évaluation#Calcul des paramètres|Calcul des paramètres]], il faut pouvoir réaliser une égression linéaire sur plusieurs optimisations de ces deux derniers paramètres qui dépende de $y_A$.
+
+Pour le faire on va organiser nos données par quantiles de $y_A$.
+C'est  à dire que nos groupes de données sont organisés par le $y_A$ qui est rattaché à ceux-là 
+
+
+
 # Nos Fittings
 # Étude Statistique des Résultats
 
