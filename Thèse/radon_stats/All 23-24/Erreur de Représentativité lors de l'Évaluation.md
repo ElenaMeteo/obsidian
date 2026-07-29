@@ -116,11 +116,13 @@ où les valeurs de $\alpha_0$, $\alpha_1$, $\beta_0$, $\beta_1$, ainsi que l'ens
 
 ## Base de données
 
-La base de données va nous servir à déterminer la distribution $\mathcal{D}$ qu'on va attribuer à la dispersion de radon et à valider notre modèle. Réalisons donc une description complète de la base de données sur laquelle on travaille.
+La base de données nous servira à déterminer la distribution $\mathcal{D}$ que nous attribuerons à la dispersion de radon, ainsi qu'à valider notre modèle. Nous commençons donc par une description détaillée de la base de données utilisée.
 
 ### Structure des données
 
-Nos données sont constituées d'un fichier *.csv* par station de mesure, classifiés par département. Ceux-ci contiennent la quantité de radon ([[rayonnement gamma]]) mesurée par heure, c'est à dire que dans notre cas on a $freq = 1h$. Le tableau suivant montre la structure générale des archives.
+Nos données sont constituées d'un fichier *.csv* par station de mesure, étalé sur les registres de 2023 et 2024 et classés par département. Chaque fichier contient la quantité de radon ([[rayonnement gamma]]) mesurée toutes les heures. Dans notre cas, la fréquence d'échantillonnage est donc $freq = 1h$. 
+
+Le tableau suivant montre la structure générale des archives.
 
 | Données |             |                   |          |       |            |
 | ------- | ----------- | ----------------- | -------- | ----- | ---------- |
@@ -134,59 +136,221 @@ Nos données sont constituées d'un fichier *.csv* par station de mesure, classi
 |         |             |                   | ...      |       |            |
 ### Cellules de la maille
 
-Donnée une maille $\mathcal{M}$ , nous avons un certain nombre de cellules qui contiennent un certain nombre de stations qui à son tour fourniront les observations qui vont composer es données.
+Étant donnée une maille $\mathcal{M}$ , celle-ci est composée d'un ensemble de cellules contenant chacune un certain nombre de stations de mesure. Les observations fournies par ces stations constituent les données exploitées dans notre étude.
 
-Notre objectif est d'avoir un maximum de données tout en gardant la cohérence au moment de la sélection. Maintenir le sens dans nos analyses, nous réalisons un filtrage logique des données. Rappelons nous que $$y_A^{i,t} = \frac{1}{S_i}\sum_{j=1}^{S_i} y_B^{i,j,t}.$$Comme on peut le voir sur la formule, au moment de considérer une cellule, on a besoin de plusieurs points de mesure des $y_B$ afin d'avoir un $y_A$ plus représentatif. Nous avons donc établi la condition suivante:
+Notre objectif est de disposer d'un volume de données aussi important que possible tout en garantissant la cohérence des analyses. Pour cela, nous appliquons un premier filtrage des cellules.
+
+Rappelons que $$y_A^{i,t} = \frac{1}{S_i}\sum_{j=1}^{S_i} y_B^{i,j,t}.$$Cette expression montre que le calcul de $y_A$ repose sur l'ensemble des observations $y_B$ disponibles dans une cellule. Il est donc nécessaire de disposer d'un nombre suffisant de stations afin que $y_A$ soit représentatif de la cellule considérée. Nous retenons ainsi le critère suivant:
 $$\text{$m_i$ entre dans la base de donn\'ees $\Leftrightarrow$ $S_i$ $\geq$ $5$ }.$$
-Autrement dit, seulement les cellules contenant cinq stations de mesure ou plus prennent partie dans notre étude. 
+Autrement dit, seulement les cellules contenant au moins cinq stations de mesure sont conservées dans l'étude.
 ### Pics de radon
 
 Une fois les cellules sélectionnes, nos données vont passer un deuxième filtre concernant les valeurs observées. 
 
-Rappelons-nous qu'on travaille sur la présence de radon dans l'atmosphère. Et ce qui nous intéresse est une présence anormalement haute. Le radon 222 est présent en permanence dans l'atmosphère, cela crée un bruit de fond difficile à modéliser qui va probablement polluer nos données. C'est por cela qu'on définit un seuil, $P_{radon}$, à partir duquel on va considérer avoir observé un pic. Cette condition étant un peu stricte en vue de la complexité du modèle, on ajoute aussi une tolérance.
+Nous nous intéressons aux épisodes de forte concentration en radon dans l'atmosphère. Le radon 222 étant présent en permanence, il génère un bruit de fond difficile à modéliser et susceptible de perturber l'analyse. Nous définissons donc un seuil $P_{radon}$ à partir duquel une observation est considérée comme un pic de radon.
 
-On considère donc avoir observé un pic si une de ces conditions se valide:
+Cette définition étant relativement stricte au regard de la complexité du phénomène, nous introduisons également une tolérance afin de prendre en compte certains cas limites. 
+
+Un pic est considéré comme observé si l'une des deux conditions suivantes est vérifiée :
 - $y_B^{i,j,t} \geq P_{radon}$
 - $\big(z^{i,j,t} \geq P_{radon} + tol_{z}\big) \text{ et } \big(y_B^{i,j,t} \geq P_{radon} - tol_y\big)$ 
-C'est à dire que si la prévision détecte un pic avec un peu de marge (déterminée par $tol_z$) et que le pic n'a pas été observé mais le taux était quand même assez élevé (déterminé par $tol_y$) alors on considère aussi avoir observé un pic. 
 
-Le filtre au niveau des données est donc défini de la manière suivante:
-$$\text{La touple $(y_A^{i,t}, \{y_B^{i,j,t}\}_j)$ est dans la base de donn\'ees $\Leftrightarrow$ $\exists j\in J$: un pic a \'et\'e observ\'e sur  $y_B^{i,j,t}$.}$$
+Autrement dit, si la prévision détecte un pic avec une marge déterminée par $tol_z$ et que l'observation est légèrement inférieure au seuil, mais reste suffisamment élevée (à moins de $tol_y$ du seuil), nous considérons également qu'un pic a été observé.
+
+Le filtrage des données est donc défini par la condition suivante :
+$$\text{Le touple $(y_A^{i,t}, \{y_B^{i,j,t}\}_j)$ appartient à la base de donn\'ees $\Leftrightarrow$ $\exists j\in J$: un pic ait \'et\'e observ\'e sur  $y_B^{i,j,t}$.}$$
 ## Construction de la maille
 
-La maille, dans notre algorithme est totalement déterminée par la variable $\Delta$ que, comme on a précisé antérieurement, correspond à la longueur de cette dernière. 
+Dans notre algorithme, la maille est entièrement déterminée par le paramètre $\Delta$, qui représente la longueur du côté des cellules.
 
-Au moment de faire l'étude statistique concernant les paramètres de la distribution $\mathcal{D}$ rattachée à la variable aléatoire $E$, on va faire varier $\Delta$. Il n'y a donc rien à établir pour cette partie là. 
-En revanche, il faut fixer $\Delta$ afin faire l'étude qui va nous aider à déterminer $\mathcal{D}$.
+Lors de l'étude statistique des paramètres de la distribution $\mathcal{D}$ associée à la variable aléatoire $E$, nous ferons varier la valeur de $\Delta$. Aucun choix définitif n'est donc nécessaire à cette étape.
 
-On a choisit de faire cela en maximisant les données desquelles on allait disposer concernant le filtre décrit dans la partie [[Erreur de Représentativité lors de l'Évaluation#Cellules de la maille|Cellules de la maille]]. C'est à dire qu'on a mis le kilométrage de la maille en relation au nombre de cellules avec cinq stations de mesure ou plus. 
+En revanche, il est indispensable de fixer une valeur de $\Delta$ pour mener les analyses préliminaires permettant d'estimer la distribution $\mathcal{D}$.
+
+Nous avons choisi cette valeur en maximisant le nombre de cellules satisfaisant le critère défini dans la section [[Erreur de Représentativité lors de l'Évaluation#Cellules de la maille|Cellules de la maille]]. Plus précisément, nous avons étudié l'évolution du nombre de cellules contenant au moins cinq stations de mesure en fonction de la taille de la maille.
 
 | $\Delta$ (km) | 20  | 30  | 40  | 45  | 50  | 55  | 60  | 70  | 80  | 90  | 100 |
 | ------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | > 5 stations  |  4  | 19  | 27  | 27  | 26  | 26  | 28  | 24  | 27  | 22  | 21  |
 
-Dans le tableau on voit que, le meilleur compromis est $\Delta=40km$ avec $27$ cellules, puisqu'on est pas loin du nombre maximum de cellules traitées (atteint à 28 cellules pour $\Delta =80km$) et on a le double de précision. 
+Le tableau montre que $\Delta = 40\mathrm{km}$ constitue un bon compromis. Cette valeur permet de conserver 27 cellules, soit presque le maximum observé (28 cellules pour $\Delta = 60\mathrm{km}$), tout en offrant une résolution spatiale sensiblement plus fine.
 
-On établit donc pour la suite $\Delta =40km$, jusqu'à préciser autrement. 
+Nous fixons donc, pour la suite de cette étude, $\Delta = 40\mathrm{km}$, sauf mention contraire.
 # Traitement des Données
 
 ## Erreur sur nos données
 
-Une fois les données filtrées, on peut voir à quoi les $y_B$ ressemblent par rapport à ses correspondant $y_A$. Voici un graphique où nous avons mis en ordonnée tous les $y_B$ d'une même station et en abscisse, sa correspondante valeur $y_A$:
+Une fois les données filtrées, nous pouvons comparer les observations $y_B$ aux valeurs agrégées correspondantes $y_A$. La figure suivante représente, en ordonnée, les valeurs $y_B$ mesurées pour une station et, en abscisse, les valeurs correspondantes de $y_A$:
 
 ![[yAyB_40_all_2324 4.png|382]]
 
-Ce graphique nous donne une idée de l'erreur de représentativité présent dans nos données. Une représentation idéale maintiendrait les points bleus sur la diagonale noire. On voit bien que c'est loin d'être la cas avec l'échelle du graphique. 
+Ce graphique donne une première estimation de l'erreur de représentativité présente dans les données. Dans un cas idéal, tous les points seraient alignés sur la diagonale noire. On constate cependant que les observations s'en écartent fortement, ce qui met en évidence une dispersion importante.
 
 ## Quantiles de $y_A$
 
-Pour pouvoir construire une fonction affine définissant le comportement de la moyenne $\mu$ et de l'écart-type $\sigma$ en dépendant de $y_A$ comme décrit sur la partie [[Erreur de Représentativité lors de l'Évaluation#Calcul des paramètres|Calcul des paramètres]], il faut pouvoir réaliser une égression linéaire sur plusieurs optimisations de ces deux derniers paramètres qui dépende de $y_A$.
+Afin de construire les fonctions affines décrivant l'évolution de la moyenne $\mu$ et de l'écart-type $\sigma$ en fonction de $y_A$, comme présenté dans la section [[Erreur de Représentativité lors de l'Évaluation#Calcul des paramètres|Calcul des paramètres]], il faut pouvoir réaliser une régression linéaire à partir de plusieurs estimations de ces paramètres pour différentes valeurs de $y_A$.
 
-Pour le faire on va organiser nos données par quantiles de $y_A$.
-C'est  à dire que nos groupes de données sont organisés par le $y_A$ qui est rattaché à ceux-là 
+Pour cela, nous regroupons les données en un certain nombre $N_q$ quantiles de $y_A$, $\{q_n\}_n^{N_q}$. Autrement dit, les observations sont réparties en plusieurs groupes en fonction de la valeur de $y_A$ à laquelle elles sont associées. La valeur de $N_q$ est aussi à déterminer. Avec $N_q=10$ y en a assez pour faire une régression linéaire représentative.
+
+Rappelons que nous avons un $y_A$, calculé à partir d'au moins cinq $y_B$'s, par cellule de la maille pour chaque instant marqué par $freq$. Cela fait $27$ $y_A$'s par heure avant de passer le filtre des pics de radon. En sachant que notre base de données s'étale sur deux ans, on peut en conclure qu'elle sera assez riche malgré les filtres imposés.
+
+Nous allons donc regrouper toutes les valeurs $y_B$ associées aux $y_A$ appartenant au quantile correspondant et cela va nous donner une distribution.
+
+![[Images - Ch. Erreur Obs 1.png|484]]
+
+# Configuration du fitting
+
+Un fitting est une approximation à nos données à travers d'une distribution théorique. L'idée est d'optimiser les paramètres de cette distribution afin qu'elle s'ajuste au mieux à la densité de nos valeurs de radon observé.
+
+Pour commencer, il fait définir un ensemble de distributions à tester et voir laquelle s'y ajuste le mieux en quantifiant l'erreur commise. 
+## Distributions plausibles
+
+Voici un graphique qui met en évidence tous les pics observés en France pour nous aider à choisir les distributions candidates:
+
+![[all_peaks_france_sans_dist.png|340]]
+
+Notre liste initiale de distributions était donc: 
+- Distribution normale
+- Distribution weibull min
+- Distribution weibull max
+- Distribution beta
+- Distribution gamma
+- Distribution log-norm,
+puisque ce sont celles qui s'adaptaient le mieux à la totalité de nos données (voir graphique tous les pics). Très vite nous avons vu que seulement les deux dernières pouvaient être considérées comme des possibles candidates. Néanmoins, dans les tests que nous allons commenter, on a gardé aussi les résultats du fitting de la distribution normale pour avoir un point de repère, même si elle est jamais choisie.
+
+## Évaluation des possibilités
+
+D'une autre part, il faut aussi pouvoir quantifier à quel point nos candidats sont legitimes et/ou meilleurs que les autres. Nous avons mis en place une échelle à la base des scores $AIC$ et $BIC$, que nous allons développer par la suite. 
+
+Le **AIC** (Critère d’information d’Akaike) et le **BIC** (Critère d’information bayésien) sont des critères utilisés pour **comparer des modèles statistiques** (par exemple, des régressions) et décider lequel est le meilleur.
+Ils ne mesurent pas directement l’erreur (comme le MSE ou le RMSE), mais ils équilibrent :
+- La qualité d’ajustement du modèle aux données  
+- La complexité du modèle (nombre de paramètres)  
+### AIC 
+Ce critère pénalise la complexité et donc privilégie la capacité prédictive. Voici la formule de calcul:
+$$
+AIC = - 2\ln(L) + 2k,
+$$
+où $k$ est le nombre de paramètres du modèle et $L$, sa vraisemblance. Plus le AIC est faible, meilleur est modèle. 
+### BIC 
+Le BIC favorise des modèles plus simples et cherche le modèle “vrai”. Voici la formule de calcul:
+$$
+BIC =  - 2\ln(L) + k\ln(n),
+$$
+où $k$ est nombre de paramètres , $n$ le nombre d’observations et $L$ la vraisemblance. Plus le BIC est faible, meilleur est modèle. Il pénalise davantage la complexité, surtout lorsque $n$ est grand.  
+
+## Méthode utilisée
+
+Pour finir, il faut choisir la manière avec laquelle on va réaliser les optimisations. Cette question apparait quand con compare des distributions à approcher avec et sans le filtre des pics de radon. 
+
+Voici la distribution des données avec le filtre sur le premier quantile avec $N_q=20$:
+
+![[dist_yB_sans_eval_quantile_0 1.png|323]]
+
+Dans ce graphique on détecte une présence d'un événement à partir de 10, qui correspond à notre définition de pic. En ayant appliqué le filtre des pics c'est normal de retrouver ça parce que, pour tou $y_A$ il y aura au moins un $y_B >10$.
 
 
+Et voici la distribution des données sans le filtre, aussi sur le premier quantile:	
 
-# Nos Fittings
-# Étude Statistique des Résultats
+![[dist_yB_sans_eval_quantile_0.png|325]]
+
+Dans ce graphique on ne retrouve plus le double événement mais un petit pic proche de 0. Cela est dû au quantile choisi. C'est, en effet, un pic que descend quand on augmente le quantile.
+
+On voit que lorsqu'on applique le filtre des pics sur les données, un double événement apparaît au sein de la densité des données des premiers quantiles. Cela rend le fitting habituel pas super efficace. Nous pouvons envisager un double fitting, détails duquel nous allons préciser, mais évidemment les résultats se compliquent. Avec un double fitting nous obtenons tous les paramètres en doublé plus un autre, le poids, qu'on décrira par la suite.
+
+Décisions à prendre après l'étude:
+- Applique-t-on le filtre de pics de radon?
+- Si oui, vaut-il le coup de faire un fitting double?
+
+Voici donc les possibilités sur les méthodes.
+### Fitting simple
+
+Le fitting simple, comme l'indique son nom, es moins compliqué que l'alternative, mais il risque aussi d'être moins précis. Nous avons réalisé nos fittings simples avec deux méthodes qu'on a appelé: simple automatique et simple manuelle. 
+
+La méthode simple automatique fait directement appel a la fonction `fit`de `scipy`. On donne les données et la distribution que nous voulons tester. En retour on obtient les paramètres qui minimisent l'erreur entre la distribution choisie et nos données. Une possibilité quand on fait ça est que le logiciel trouve un minimum local qui nous donne une solution non physique. C'est pour cela qu'on est intervenus avec une méthode manuelle qu'on pouvait plus contrôler.
+
+La méthode simple manuelle réalise une minimisation automatique mais seulement dans les limites qu'on établit, pouvant ainsi préciser un maximum d'itérations. Cela contrôle l'"explosion" de l'optimisation et les résultats ne semblent pas être mauvais comparés avec la méthode automatique
+### Fitting double
+
+D'une autre part, en raison du double événement provoqué par le filtrage, il faut aussi considérer un fitting avec une double distribution. Dans notre cas, pour maintenir les choses simples cela se ferait entre deux distributions qui utilisent la même loi. Mais il faut pouvoir gérer ça dans le cadre de notre objectif: trouver des formules pour les paramètres concernés qui dépendent de l'erreur de représentativité.
+
+La technique du double fitting est pareil que la simple mais en combinant les choses avec des poids. Il s'agit donc de réaliser une combinaison de deux distributions.  Considérons $\{q_n\}_{n}^{N_q}$ l'ensemble des quantiles traités. Alors, pour tout $n$ on aura une $pdf_n$ telle que: 
+$$pdf_{n} := \omega \cdot pdf_1 + (1-\omega)\cdot pdf_2,$$
+où $\omega = \omega(N_q,q_n) = \omega_{N_q}(q_n)$ est un paramètre qui va dépendre des emplacements du double pic pour chaque quantile $n$.  Il faudra donc trouver une expression de $\omega$ en fonction du nombre de quantiles qu'on traite, $N_q$, et du quantile $q_n$.
+
+Cette $pdf_n$ attribuera deux paramètres de moyenne de écart-type pour chaque quantile de $y_A$, chacun correspondant aux valeurs des deux $pdf$'s qui composent $pdf_n$. Pour chaque quantile $q_n$ on aura quatre valeurs regroupées dans $Q_n$:
+$$Q_n := \begin{cases}
+(\mu_{1,n}, \mu_{2,n}), \text{en tant que moyennes},\\
+(\sigma_{1,n}, \sigma_{2,n}), \text{en tant qu'\'ecart-types}.
+\end{cases}$$
+Le but est donc de déterminer les fonctions qui suivent à partir de l'ensemble $\{Q_n\}_{n\in I}$  telles que: 
+$$\begin{cases}
+\mu_{1}(y_A) = \alpha_{1,1}\cdot y_A + \alpha_{1,2},\\
+\mu_{2}(y_A) = \alpha_{2,1}\cdot y_A + \alpha_{2,2},
+\end{cases}$$
+$$\begin{cases}
+\sigma_{1}(y_A) = \beta_{1,1}\cdot \sqrt{y_A} + \beta_{1,2},\\
+\sigma_{2}(y_A) = \beta_{2,1}\cdot \sqrt{y_A} + \beta_{2,2},
+\end{cases}$$
+
+où les paramètres $(\alpha_{i,1}, \alpha_{i,2})$ sont déterminés à partir d'une régression linéaire sur l'ensemble $\{\mu_{i,n}\}_{n\in I}$ et les paramètres $(\beta_{i,1}, \beta_{i,2})$ sont déterminés à partir d'une régression linéaire sur l'ensemble $\{\sigma_{i,n}\}_{n\in I}$. 
+
+# Choix de la distribution
+
+Dans cette étude statistique nous allons analyser les résultats des fittings réalisés avec les trois méthodes détaillées. Les distributions utilisées seront:
+- Distribution normale
+- Distribution gamma
+- Distribution log-norm
+
+---
+Voici les résultats pour les données avec filtre:
+
+Quantile 0:
+![[dist_yB_3eval_quantile_0 2.png]]
+Quantile 1:![[dist_yB_3eval_quantile_1.png|697]]
+Quantile 2:
+![[dist_yB_3eval_quantile_2.png]]
+Quantile 3:![[dist_yB_3eval_quantile_3 1.png]]
+Quantile 4:![[dist_yB_3eval_quantile_4 1.png]]
+Quantile 5:![[dist_yB_3eval_quantile_5.png]]
+Quantile 6:![[dist_yB_3eval_quantile_6.png]]
+Quantile 7:![[dist_yB_3eval_quantile_7.png]]
+Quantile 8:![[dist_yB_3eval_quantile_8.png]]
+Quantile 9:![[dist_yB_3eval_quantile_9.png]]
+
+Et les résultats statistiques correspondants avec nos mesures:
+
+| nº de dep en faveur | AIC | BIC | Écart  AIC moyen à la meilleure (%) | Écart BIC moyen à la meilleure (%) | nº invalides |
+| ------------------- | --- | --- | ----------------------------------- | ---------------------------------- | ------------ |
+| `norm`              |     |     |                                     |                                    |              |
+| `gamma`             |     |     |                                     |                                    |              |
+| `log-norm`          |     |     |                                     |                                    |              |
+
+---
+Voici les résultats pour les données sans filtre:
+
+Quantile 0:
+![[dist_yB_3eval_quantile_0 3.png]]
+Quantile 1:
+![[dist_yB_3eval_quantile_1 1.png]]
+Quantile 2:![[dist_yB_3eval_quantile_2 1.png]]
+Quantile 3:![[dist_yB_3eval_quantile_3 2.png]]
+Quantile 4:![[dist_yB_3eval_quantile_4 2.png]]
+Quantile 5:![[dist_yB_3eval_quantile_5 1.png]]
+Quantile 6:![[dist_yB_3eval_quantile_6 1.png]]
+Quantile 7:![[dist_yB_3eval_quantile_7 2.png]]
+Quantile 8:![[dist_yB_3eval_quantile_8 1.png]]
+Quantile 9:![[dist_yB_3eval_quantile_9 1.png]]
+
+Et les résultats statistiques correspondants avec nos mesures:
+
+| nº de dep en faveur | AIC | BIC | Écart  AIC moyen à la meilleure (%) | Écart BIC moyen à la meilleure (%) | nº invalides |
+| ------------------- | --- | --- | ----------------------------------- | ---------------------------------- | ------------ |
+| `norm`              |     |     |                                     |                                    |              |
+| `gamma`             |     |     |                                     |                                    |              |
+| `log-norm`          |     |     |                                     |                                    |              |
+
+# Calcul des paramètres
+
+
 

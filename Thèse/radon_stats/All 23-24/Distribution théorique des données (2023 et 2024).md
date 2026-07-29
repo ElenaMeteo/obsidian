@@ -23,7 +23,7 @@ et, si d'une autre part, on fait ça seulement avec `log-norm`:
 
 ![[dist_yB_all10q_eval_lognorm.png]]
 
-La deuxième fênetre peut être considérée meilleure parce que `log-norm` fonctionne sur un quantile de plus que `gamma`. Mais en voulant faire une régression il est pas idéal que les deux quantiles conflictuels soient les deux premiers. De plus, la distribution `gamma` a un grand avantage par rapport à `log-norm`: on en a un exemple avec l'article de référence. 
+La deuxième fenêtre peut être considérée meilleure parce que `log-norm` fonctionne sur un quantile de plus que `gamma`. Mais en voulant faire une régression il est pas idéal que les deux quantiles conflictuels soient les deux premiers. De plus, la distribution `gamma` a un grand avantage par rapport à `log-norm`: on en a un exemple avec l'article de référence. 
 
 Voyons ce qu'il se passe quand on utilise `gamma` sur 20 quantiles:
 
