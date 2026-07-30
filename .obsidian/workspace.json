@@ -80,20 +80,6 @@
             }
           },
           {
-            "id": "bf8456edc976b403",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Thèse/suivi/Carnet de Bord.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Carnet de Bord"
-            }
-          },
-          {
             "id": "08c396b7b9944316",
             "type": "leaf",
             "state": {
@@ -136,34 +122,6 @@
             }
           },
           {
-            "id": "e4add68022c55adf",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Thèse/radon_stats/All 23-24/Distribution théorique des données (2023 et 2024).md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Distribution théorique des données (2023 et 2024)"
-            }
-          },
-          {
-            "id": "0a237bab53b25641",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Thèse/radon_stats/All 23-24/Formules mu et sigma (yA).md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Formules mu et sigma (yA)"
-            }
-          },
-          {
             "id": "77b39de9a52b669b",
             "type": "leaf",
             "state": {
@@ -175,20 +133,6 @@
               },
               "icon": "lucide-file",
               "title": "Distribution théorique des données (juin 2025)"
-            }
-          },
-          {
-            "id": "1bfae507ea8b5901",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Thèse/suivi/Carnet de Bord.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Carnet de Bord"
             }
           }
         ]
@@ -233,22 +177,12 @@
               "icon": "lucide-search",
               "title": "Buscar"
             }
-          },
-          {
-            "id": "148660b0a9c2dead",
-            "type": "leaf",
-            "state": {
-              "type": "bookmarks",
-              "state": {},
-              "icon": "lucide-bookmark",
-              "title": "Marcadores"
-            }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 250.500732421875
+    "width": 200
   },
   "right": {
     "id": "6864c0054ededfac",
@@ -340,7 +274,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -356,24 +290,24 @@
   },
   "active": "77a8d86c48052e0b",
   "lastOpenFiles": [
+    "Adjuntos/regression_weights.png",
+    "Adjuntos/regression_sigma2.png",
+    "Adjuntos/regression_sigma1.png",
+    "Adjuntos/regression_mu2.png",
+    "Adjuntos/regression_mu1 1.png",
+    "Adjuntos/regression_mu1.png",
+    "Adjuntos/regression_sigma_simple 1.png",
+    "Adjuntos/regression_sigma_simple.png",
+    "Adjuntos/regression_mu_simple.png",
+    "Thèse/radon_stats/Juin 2025/Distribution théorique des données (juin 2025).md",
+    "Thèse/suivi/Carnet de Bord.md",
+    "Thèse/radon_stats/All 23-24/Distribution théorique des données (2023 et 2024).md",
+    "Thèse/radon_stats/Préliminaires/Concepts nécessaires.md",
+    "Thèse/radon_stats/All 23-24/Paramètres de la distribution (bases).md",
+    "Thèse/radon_stats/All 23-24/Erreur de Représentativité lors de l'Évaluation.md",
     "Adjuntos/dist_yB_3eval_quantile_9 1.png",
     "Adjuntos/dist_yB_3eval_quantile_8 1.png",
-    "Adjuntos/dist_yB_3eval_quantile_7 2.png",
-    "Adjuntos/dist_yB_3eval_quantile_7 1.png",
-    "Adjuntos/dist_yB_3eval_quantile_6 1.png",
-    "Adjuntos/dist_yB_3eval_quantile_5 1.png",
-    "Adjuntos/dist_yB_3eval_quantile_4 2.png",
-    "Adjuntos/dist_yB_3eval_quantile_3 2.png",
-    "Adjuntos/dist_yB_3eval_quantile_2 1.png",
-    "Adjuntos/dist_yB_3eval_quantile_1 1.png",
-    "Adjuntos/dist_yB_3eval_quantile_0 3.png",
-    "Thèse/suivi/Carnet de Bord.md",
-    "Thèse/radon_stats/All 23-24/Erreur de Représentativité lors de l'Évaluation.md",
-    "Thèse/radon_stats/Juin 2025/Distribution théorique des données (juin 2025).md",
-    "Thèse/radon_stats/All 23-24/Distribution théorique des données (2023 et 2024).md",
     "Thèse/radon_stats/All 23-24/Formules mu et sigma (yA).md",
-    "Thèse/radon_stats/All 23-24/Paramètres de la distribution (bases).md",
-    "Thèse/radon_stats/Préliminaires/Concepts nécessaires.md",
     "Thèse/radon_stats/Juin 2025/Présence erreur de représentativité.md",
     "Thèse/radon_stats/Juin 2025/Stations de mesure.md",
     "Thèse/radon_stats/Préliminaires/Données.md",

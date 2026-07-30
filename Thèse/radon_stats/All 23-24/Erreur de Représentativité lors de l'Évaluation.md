@@ -302,55 +302,146 @@ Dans cette étude statistique nous allons analyser les résultats des fittings r
 - Distribution gamma
 - Distribution log-norm
 
----
+Maintenant nous allons montrer les résultats des fittings pour les données avec et sans filtre de pics de radon. Sur la légende y aura une distribution qui sera écrite en gras. Elle correspond à la meilleure des options, sous un des critères (dans ce cas, le $BIC$), sur les trois fittings essayées. Cela est fait pour avoir un point de repère dans chacun des graphiques mais on va aussi étudier les résultats par rapport au $AIC$.
+
+## Résultats fitting avec filtre
+
 Voici les résultats pour les données avec filtre:
 
 Quantile 0:
 ![[dist_yB_3eval_quantile_0 2.png]]
-Quantile 1:![[dist_yB_3eval_quantile_1.png|697]]
+
+Quantile 1:
+![[dist_yB_3eval_quantile_1.png|800]]
+
 Quantile 2:
 ![[dist_yB_3eval_quantile_2.png]]
+
 Quantile 3:![[dist_yB_3eval_quantile_3 1.png]]
+
 Quantile 4:![[dist_yB_3eval_quantile_4 1.png]]
+
 Quantile 5:![[dist_yB_3eval_quantile_5.png]]
+
 Quantile 6:![[dist_yB_3eval_quantile_6.png]]
+
 Quantile 7:![[dist_yB_3eval_quantile_7.png]]
+
 Quantile 8:![[dist_yB_3eval_quantile_8.png]]
+
 Quantile 9:![[dist_yB_3eval_quantile_9.png]]
 
 Et les résultats statistiques correspondants avec nos mesures:
 
-| nº de dep en faveur | AIC | BIC | Écart  AIC moyen à la meilleure (%) | Écart BIC moyen à la meilleure (%) | nº invalides |
-| ------------------- | --- | --- | ----------------------------------- | ---------------------------------- | ------------ |
-| `norm`              |     |     |                                     |                                    |              |
-| `gamma`             |     |     |                                     |                                    |              |
-| `log-norm`          |     |     |                                     |                                    |              |
+| Fitting simple automatique | AIC | BIC | Écart  AIC moyen à la meilleure (%) | Écart BIC moyen à la meilleure (%) | nº invalides | Moyenne BIC |
+| -------------------------- | --- | --- | ----------------------------------- | ---------------------------------- | ------------ | ----------- |
+| `norm`                     | 1   | 1   | 19.624                              | 19.610                             | 0            | 39415.442   |
+| `gamma`                    | 1   | 1   | 68.857                              | 68.840                             | 2            | 60695.731   |
+| `log-norm`                 | 8   | 8   | 5.660                               | 5.658                              | 1            | 43088.783   |
 
----
+| Fitting simple manuel | AIC | BIC | Écart  AIC moyen à la meilleure (%) | Écart BIC moyen à la meilleure (%) | nº invalides | Moyenne BIC |
+| --------------------- | --- | --- | ----------------------------------- | ---------------------------------- | ------------ | ----------- |
+| `norm`                | 0   | 0   | 35.768                              | 35.730                             | 0            | 49931.213   |
+| `gamma`               | 0   | 0   | 0.585                               | 0.585                              | 0            | 37077.972   |
+| `log-norm`            | 10  | 10  | 0                                   | 0                                  | 0            | 36871.456   |
+
+| Fitting double | AIC | BIC | Écart  AIC moyen à la meilleure (%) | Écart BIC moyen à la meilleure (%) | nº invalides | Moyenne BIC |
+| -------------- | --- | --- | ----------------------------------- | ---------------------------------- | ------------ | ----------- |
+| `norm`         | 0   | 0   | 34.278                              | 34.208                             | 0            | 49536.632   |
+| `gamma`        | 5   | 5   | 0.159                               | 0.159                              | 0            | 36941.814   |
+| `log-norm`     | 5   | 5   | 0.252                               | 0.252                              | 0            | 37052.447   |
+
+## Résultats fitting sans filtre
+
 Voici les résultats pour les données sans filtre:
 
 Quantile 0:
 ![[dist_yB_3eval_quantile_0 3.png]]
+
 Quantile 1:
 ![[dist_yB_3eval_quantile_1 1.png]]
+
 Quantile 2:![[dist_yB_3eval_quantile_2 1.png]]
+
 Quantile 3:![[dist_yB_3eval_quantile_3 2.png]]
+
 Quantile 4:![[dist_yB_3eval_quantile_4 2.png]]
+
 Quantile 5:![[dist_yB_3eval_quantile_5 1.png]]
+
 Quantile 6:![[dist_yB_3eval_quantile_6 1.png]]
+
 Quantile 7:![[dist_yB_3eval_quantile_7 2.png]]
+
 Quantile 8:![[dist_yB_3eval_quantile_8 1.png]]
-Quantile 9:![[dist_yB_3eval_quantile_9 1.png]]
+
+Quantile 9:
+![[dist_yB_3eval_quantile_9 1.png|697]]
 
 Et les résultats statistiques correspondants avec nos mesures:
 
-| nº de dep en faveur | AIC | BIC | Écart  AIC moyen à la meilleure (%) | Écart BIC moyen à la meilleure (%) | nº invalides |
-| ------------------- | --- | --- | ----------------------------------- | ---------------------------------- | ------------ |
-| `norm`              |     |     |                                     |                                    |              |
-| `gamma`             |     |     |                                     |                                    |              |
-| `log-norm`          |     |     |                                     |                                    |              |
+| Fitting simple automatique | AIC | BIC | Écart  AIC moyen à la meilleure (%) | Écart BIC moyen à la meilleure (%) | nº invalides | Moyenne BIC |
+| -------------------------- | --- | --- | ----------------------------------- | ---------------------------------- | ------------ | ----------- |
+| `norm`                     | 0   | 0   | nan                                 | nan                                | 0            | 707040.894  |
+| `gamma`                    | 2   | 2   | nan                                 | nan                                | 1            | 976514.629  |
+| `log-norm`                 | 8   | 8   | nan                                 | nan                                | 4            | 898463.556  |
+
+| Fitting simple manuel | AIC | BIC | Écart  AIC moyen à la meilleure (%) | Écart BIC moyen à la meilleure (%) | nº invalides | Moyenne BIC |
+| --------------------- | --- | --- | ----------------------------------- | ---------------------------------- | ------------ | ----------- |
+| `norm`                | 0   | 0   | 75.714                              | 75.708                             | 0            | 1163266.612 |
+| `gamma`               | 3   | 3   | 0.267                               | 0.267                              | 0            | 683749.258  |
+| `log-norm`            | 7   | 7   | 0.032                               | 0.032                              | 0            | 680975.526  |
+
+| Fitting double | AIC | BIC | Écart  AIC moyen à la meilleure (%) | Écart BIC moyen à la meilleure (%) | nº invalides | Moyenne BIC |
+| -------------- | --- | --- | ----------------------------------- | ---------------------------------- | ------------ | ----------- |
+| `norm`         | 1   | 1   | 44.716                              | 44.716                             | 0            | 1123906.437 |
+| `gamma`        | 7   | 7   | 4.677                               | 4.677                              | 0            | 812500.011  |
+| `log-norm`     | 2   | 2   | 5.138                               | 5.138                              | 0            | 819931.741  |
+
+## Analyse des résultats
+
+Nous pouvons voir dans les deux études `log-norm` l'emporte clairement pour le fitting simple et `gamma`l'emporte pour le fitting double. Si on regarde les moyennes de BIC pour chaque méthode et distribution, on remarque que pour la base de données filtrée, les méthodes simple manuelle et double sont tout aussi legitimes; alors que pour la base de données non filtrée, il y a quand-même un grand écart entre les résultats du meilleur fitting simple et le meilleur fitting double. Cela dit, on va faire les calculs pour les deux méthodes dans les deux cas. 
+
 
 # Calcul des paramètres
+
+Voici les résultats des régressions linéaires et les équations obtenues pour chaque paramètre.
+
+## Données avec filtre
+### Méthode simple: `log-norm`
+
+#### Équations obtenues
+$$\mu(y_A) = 4.0064 + 0.4681y_A$$
+$$ \sigma(y_A) = 0.4497 + 1.2558\sqrt{y_A}$$
+
+#### Régressions
+
+Moyenne:
+![[regression_mu_simple.png|354]]
+
+Écart-type:
+![[regression_sigma_simple 1.png|360]]
+### Méthode double: `gamma`
+#### Équations obtenues
+$$\mu_1(y_A) = 3.0409 + 0.4701y_A$$
+$$\mu_2(y_A) = 4.6187 + 0.4991y_A$$
+$$\sigma_1(y_A) = 0.6742 + 0.9767\sqrt{y_A}$$
+$$\sigma_2(y_A) = 0.5731 + 2.1737\sqrt{y_A}$$
+$$\omega(y_A) = 0.5400 + 0.0034y_A$$
+#### Régressions
+
+Moyennes:
+![[regression_mu1 1.png|302]]
+![[regression_mu2.png|302]]
+
+Écart-types:
+![[regression_sigma1.png|302]]
+![[regression_sigma2.png|302]]
+
+Poids:
+![[regression_weights.png|304]]
+
+
 
 
 
