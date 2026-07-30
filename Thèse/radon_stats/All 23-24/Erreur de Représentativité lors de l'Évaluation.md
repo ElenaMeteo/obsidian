@@ -200,113 +200,155 @@ Nous allons donc regrouper toutes les valeurs $y_B$ associées aux $y_A$ apparte
 
 # Configuration du fitting
 
-Un fitting est une approximation à nos données à travers d'une distribution théorique. L'idée est d'optimiser les paramètres de cette distribution afin qu'elle s'ajuste au mieux à la densité de nos valeurs de radon observé.
+Un fitting consiste à approximer nos données à l’aide d’une distribution théorique. L’objectif est d’optimiser les paramètres de cette distribution afin qu’elle s’ajuste au mieux à la densité des valeurs de radon observées.
 
-Pour commencer, il fait définir un ensemble de distributions à tester et voir laquelle s'y ajuste le mieux en quantifiant l'erreur commise. 
+Pour commencer, il faut définir un ensemble de distributions à tester et déterminer laquelle s’ajuste le mieux aux données en quantifiant l’erreur commise.
+
 ## Distributions plausibles
 
-Voici un graphique qui met en évidence tous les pics observés en France pour nous aider à choisir les distributions candidates:
+Le graphique ci-dessous met en évidence l’ensemble des pics observés en France afin de nous aider à sélectionner les distributions candidates :
 
 ![[all_peaks_france_sans_dist.png|340]]
 
-Notre liste initiale de distributions était donc: 
+Notre liste initiale de distributions était donc la suivante :
 - Distribution normale
-- Distribution weibull min
-- Distribution weibull max
-- Distribution beta
+- Distribution de Weibull minimale
+- Distribution de Weibull maximale
+- Distribution bêta
 - Distribution gamma
-- Distribution log-norm,
-puisque ce sont celles qui s'adaptaient le mieux à la totalité de nos données (voir graphique tous les pics). Très vite nous avons vu que seulement les deux dernières pouvaient être considérées comme des possibles candidates. Néanmoins, dans les tests que nous allons commenter, on a gardé aussi les résultats du fitting de la distribution normale pour avoir un point de repère, même si elle est jamais choisie.
+- Distribution log-normale
+
+Ces distributions ont été sélectionnées car elles semblaient être celles qui s’adaptaient le mieux à l’ensemble de nos données (voir graphique de tous les pics). Très rapidement, nous avons constaté que seules les deux dernières pouvaient être considérées comme de véritables candidates.
+
+Néanmoins, dans les tests qui seront présentés par la suite, nous avons conservé les résultats du fitting de la distribution normale afin de disposer d’un point de comparaison, même si celle-ci n’est jamais retenue comme le meilleur ajustement.
 
 ## Évaluation des possibilités
 
-D'une autre part, il faut aussi pouvoir quantifier à quel point nos candidats sont legitimes et/ou meilleurs que les autres. Nous avons mis en place une échelle à la base des scores $AIC$ et $BIC$, que nous allons développer par la suite. 
+D’autre part, il est également nécessaire de pouvoir quantifier dans quelle mesure nos candidats sont légitimes et/ou meilleurs que les autres. Pour cela, nous avons mis en place une échelle basée sur les scores **AIC** et **BIC**, que nous allons détailler par la suite.
 
-Le **AIC** (Critère d’information d’Akaike) et le **BIC** (Critère d’information bayésien) sont des critères utilisés pour **comparer des modèles statistiques** (par exemple, des régressions) et décider lequel est le meilleur.
-Ils ne mesurent pas directement l’erreur (comme le MSE ou le RMSE), mais ils équilibrent :
-- La qualité d’ajustement du modèle aux données  
-- La complexité du modèle (nombre de paramètres)  
-### AIC 
-Ce critère pénalise la complexité et donc privilégie la capacité prédictive. Voici la formule de calcul:
+Le **AIC** (_Critère d’information d’Akaike_) et le **BIC** (_Critère d’information bayésien_) sont des critères utilisés pour **comparer des modèles statistiques** (par exemple, des modèles de régression) et déterminer lequel est le plus adapté.
+
+Ils ne mesurent pas directement l’erreur du modèle (comme le MSE ou le RMSE), mais permettent de trouver un compromis entre :
+- La qualité d’ajustement du modèle aux données ;
+- La complexité du modèle (c’est-à-dire le nombre de paramètres utilisés).
+
+### AIC
+
+Ce critère pénalise la complexité des modèles et privilégie donc leur capacité prédictive. Sa formule de calcul est la suivante :
+
+$$  
+AIC = - 2\ln(L) + 2k,  
 $$
-AIC = - 2\ln(L) + 2k,
+
+où $k$ correspond au nombre de paramètres du modèle et $L$ à sa vraisemblance. Plus la valeur de l’AIC est faible, meilleur est le modèle.
+
+### BIC
+
+Le BIC favorise les modèles plus simples et cherche à identifier le modèle le plus probable parmi ceux considérés. Sa formule de calcul est la suivante :
+
+$$  
+BIC = - 2\ln(L) + k\ln(n),  
 $$
-où $k$ est le nombre de paramètres du modèle et $L$, sa vraisemblance. Plus le AIC est faible, meilleur est modèle. 
-### BIC 
-Le BIC favorise des modèles plus simples et cherche le modèle “vrai”. Voici la formule de calcul:
-$$
-BIC =  - 2\ln(L) + k\ln(n),
-$$
-où $k$ est nombre de paramètres , $n$ le nombre d’observations et $L$ la vraisemblance. Plus le BIC est faible, meilleur est modèle. Il pénalise davantage la complexité, surtout lorsque $n$ est grand.  
+
+où $k$ correspond au nombre de paramètres, $n$ au nombre d’observations et $L$ à la vraisemblance. Plus la valeur du BIC est faible, meilleur est le modèle.
+
+Le BIC pénalise davantage la complexité que l’AIC, en particulier lorsque le nombre d’observations $n$ est élevé.  
 
 ## Méthode utilisée
 
-Pour finir, il faut choisir la manière avec laquelle on va réaliser les optimisations. Cette question apparait quand con compare des distributions à approcher avec et sans le filtre des pics de radon. 
+Enfin, il faut choisir la méthode avec laquelle les optimisations seront réalisées. Cette question se pose lorsque l’on compare les distributions à approcher avec et sans l’application du filtre des pics de radon.
 
-Voici la distribution des données avec le filtre sur le premier quantile avec $N_q=20$:
+Voici la distribution des données avec le filtre appliqué sur le premier quantile, avec $N_q=20$ :
 
 ![[dist_yB_sans_eval_quantile_0 1.png|323]]
 
-Dans ce graphique on détecte une présence d'un événement à partir de 10, qui correspond à notre définition de pic. En ayant appliqué le filtre des pics c'est normal de retrouver ça parce que, pour tou $y_A$ il y aura au moins un $y_B >10$.
+Dans ce graphique, on observe la présence d’un événement à partir de 10, ce qui correspond à notre définition d’un pic. Après l’application du filtre des pics, il est normal d’observer ce comportement puisque, pour tout $y_A$, il existe au moins un $y_B > 10$.
 
-
-Et voici la distribution des données sans le filtre, aussi sur le premier quantile:	
+Voici maintenant la distribution des données sans application du filtre, toujours pour le premier quantile :
 
 ![[dist_yB_sans_eval_quantile_0.png|325]]
 
-Dans ce graphique on ne retrouve plus le double événement mais un petit pic proche de 0. Cela est dû au quantile choisi. C'est, en effet, un pic que descend quand on augmente le quantile.
+Dans ce graphique, on n’observe plus le double événement, mais plutôt un petit pic proche de 0. Cela est dû au quantile choisi. En effet, ce pic diminue lorsque l’on augmente la valeur du quantile.
 
-On voit que lorsqu'on applique le filtre des pics sur les données, un double événement apparaît au sein de la densité des données des premiers quantiles. Cela rend le fitting habituel pas super efficace. Nous pouvons envisager un double fitting, détails duquel nous allons préciser, mais évidemment les résultats se compliquent. Avec un double fitting nous obtenons tous les paramètres en doublé plus un autre, le poids, qu'on décrira par la suite.
+On constate donc que l’application du filtre des pics sur les données fait apparaître un double événement au sein de la densité des données des premiers quantiles. Cette particularité rend un fitting classique moins efficace. Nous pouvons alors envisager un double fitting, dont les détails seront précisés par la suite. Cependant, cette approche complexifie naturellement les résultats : avec un double fitting, nous obtenons l’ensemble des paramètres en double, ainsi qu’un paramètre supplémentaire correspondant au poids, qui sera décrit ultérieurement.
 
-Décisions à prendre après l'étude:
-- Applique-t-on le filtre de pics de radon?
-- Si oui, vaut-il le coup de faire un fitting double?
+Les décisions à prendre après cette étude sont donc les suivantes :
+- Applique-t-on le filtre des pics de radon ?
+- Si oui, est-il pertinent de réaliser un double fitting ?
 
-Voici donc les possibilités sur les méthodes.
+Les différentes possibilités concernant les méthodes sont présentées ci-dessous.
+
 ### Fitting simple
 
-Le fitting simple, comme l'indique son nom, es moins compliqué que l'alternative, mais il risque aussi d'être moins précis. Nous avons réalisé nos fittings simples avec deux méthodes qu'on a appelé: simple automatique et simple manuelle. 
+Comme son nom l’indique, le fitting simple est moins complexe que son alternative, mais il risque également d’être moins précis. Nous avons réalisé nos fittings simples selon deux approches que nous avons appelées : **simple automatique** et **simple manuelle**.
 
-La méthode simple automatique fait directement appel a la fonction `fit`de `scipy`. On donne les données et la distribution que nous voulons tester. En retour on obtient les paramètres qui minimisent l'erreur entre la distribution choisie et nos données. Une possibilité quand on fait ça est que le logiciel trouve un minimum local qui nous donne une solution non physique. C'est pour cela qu'on est intervenus avec une méthode manuelle qu'on pouvait plus contrôler.
+La méthode simple automatique utilise directement la fonction `fit` de `scipy`. On fournit en entrée les données ainsi que la distribution que l’on souhaite tester. En retour, on obtient les paramètres qui minimisent l’erreur entre la distribution choisie et les données observées.
 
-La méthode simple manuelle réalise une minimisation automatique mais seulement dans les limites qu'on établit, pouvant ainsi préciser un maximum d'itérations. Cela contrôle l'"explosion" de l'optimisation et les résultats ne semblent pas être mauvais comparés avec la méthode automatique
+Une limitation de cette approche est que l’algorithme peut converger vers un minimum local, ce qui peut conduire à une solution non physique. C’est pourquoi nous avons également développé une méthode manuelle offrant davantage de contrôle sur l’optimisation.
+
+La méthode simple manuelle repose également sur une minimisation automatique, mais uniquement dans un domaine défini par des contraintes que nous imposons. Elle permet notamment de limiter le nombre d’itérations et de contrôler l’« explosion » éventuelle de l’optimisation. Les résultats obtenus avec cette méthode semblent comparables, voire légèrement meilleurs, à ceux obtenus avec la méthode automatique.
+
 ### Fitting double
 
-D'une autre part, en raison du double événement provoqué par le filtrage, il faut aussi considérer un fitting avec une double distribution. Dans notre cas, pour maintenir les choses simples cela se ferait entre deux distributions qui utilisent la même loi. Mais il faut pouvoir gérer ça dans le cadre de notre objectif: trouver des formules pour les paramètres concernés qui dépendent de l'erreur de représentativité.
+D’autre part, en raison du double événement induit par le filtrage, il est également nécessaire de considérer un fitting basé sur une double distribution. Dans notre cas, afin de conserver une approche relativement simple, cette méthode consisterait à combiner deux distributions suivant la même loi.
 
-La technique du double fitting est pareil que la simple mais en combinant les choses avec des poids. Il s'agit donc de réaliser une combinaison de deux distributions.  Considérons $\{q_n\}_{n}^{N_q}$ l'ensemble des quantiles traités. Alors, pour tout $n$ on aura une $pdf_n$ telle que: 
-$$pdf_{n} := \omega \cdot pdf_1 + (1-\omega)\cdot pdf_2,$$
-où $\omega = \omega(N_q,q_n) = \omega_{N_q}(q_n)$ est un paramètre qui va dépendre des emplacements du double pic pour chaque quantile $n$.  Il faudra donc trouver une expression de $\omega$ en fonction du nombre de quantiles qu'on traite, $N_q$, et du quantile $q_n$.
+Cependant, il faut adapter cette approche à notre objectif principal : déterminer des expressions des paramètres concernés qui dépendent de l’erreur de représentativité.
 
-Cette $pdf_n$ attribuera deux paramètres de moyenne de écart-type pour chaque quantile de $y_A$, chacun correspondant aux valeurs des deux $pdf$'s qui composent $pdf_n$. Pour chaque quantile $q_n$ on aura quatre valeurs regroupées dans $Q_n$:
-$$Q_n := \begin{cases}
-(\mu_{1,n}, \mu_{2,n}), \text{en tant que moyennes},\\
-(\sigma_{1,n}, \sigma_{2,n}), \text{en tant qu'\'ecart-types}.
-\end{cases}$$
-Le but est donc de déterminer les fonctions qui suivent à partir de l'ensemble $\{Q_n\}_{n\in I}$  telles que: 
-$$\begin{cases}
-\mu_{1}(y_A) = \alpha_{1,1}\cdot y_A + \alpha_{1,2},\\
-\mu_{2}(y_A) = \alpha_{2,1}\cdot y_A + \alpha_{2,2},
-\end{cases}$$
-$$\begin{cases}
-\sigma_{1}(y_A) = \beta_{1,1}\cdot \sqrt{y_A} + \beta_{1,2},\\
-\sigma_{2}(y_A) = \beta_{2,1}\cdot \sqrt{y_A} + \beta_{2,2},
-\end{cases}$$
+La technique du double fitting repose sur le même principe que le fitting simple, mais en combinant deux distributions pondérées. Il s’agit donc de construire une combinaison de deux densités de probabilité.
 
-où les paramètres $(\alpha_{i,1}, \alpha_{i,2})$ sont déterminés à partir d'une régression linéaire sur l'ensemble $\{\mu_{i,n}\}_{n\in I}$ et les paramètres $(\beta_{i,1}, \beta_{i,2})$ sont déterminés à partir d'une régression linéaire sur l'ensemble $\{\sigma_{i,n}\}_{n\in I}$. 
+Considérons $\{q_n\}_{n}^{N_q}$ l’ensemble des quantiles traités. Pour chaque $n$, on définit alors une fonction de densité $pdf_n$ telle que :
+
+$$  
+pdf_{n} := \omega \cdot pdf_1 + (1-\omega)\cdot pdf_2,  
+$$
+
+où $\omega = \omega(N_q,q_n) = \omega_{N_q}(q_n)$ est un paramètre dépendant de la position du double pic pour chaque quantile $n$. Il faudra donc déterminer une expression de $\omega$ en fonction du nombre de quantiles considérés, $N_q$, ainsi que du quantile $q_n$.
+
+Cette $pdf_n$ attribuera deux paramètres de moyenne et d’écart-type pour chaque quantile de $y_A$, chacun correspondant aux valeurs des deux distributions composant $pdf_n$.
+
+Pour chaque quantile $q_n$, on disposera donc de quatre valeurs regroupées dans $Q_n$ :
+
+$$  
+Q_n := \begin{cases}  
+(\mu_{1,n}, \mu_{2,n}), \text{ en tant que moyennes},\  
+(\sigma_{1,n}, \sigma_{2,n}), \text{ en tant qu'écarts-types}.  
+\end{cases}  
+$$
+
+L’objectif est alors de déterminer les fonctions suivantes à partir de l’ensemble ${Q_n}_{n\in I}$ :
+
+$$  
+\begin{cases}  
+\mu_{1}(y_A) = \alpha_{1,1}\cdot y_A + \alpha_{1,2},\  
+\mu_{2}(y_A) = \alpha_{2,1}\cdot y_A + \alpha_{2,2},  
+\end{cases}  
+$$
+
+et
+
+$$  
+\begin{cases}  
+\sigma_{1}(y_A) = \beta_{1,1}\cdot \sqrt{y_A} + \beta_{1,2},\  
+\sigma_{2}(y_A) = \beta_{2,1}\cdot \sqrt{y_A} + \beta_{2,2}.  
+\end{cases}  
+$$
+
+où les paramètres $(\alpha_{i,1}, \alpha_{i,2})$ sont déterminés à partir d’une régression linéaire appliquée à l’ensemble ${\mu_{i,n}}_{n\in I}$, tandis que les paramètres $(\beta_{i,1}, \beta_{i,2})$ sont obtenus à partir d’une régression linéaire appliquée à l’ensemble ${\sigma_{i,n}}_{n\in I}$.
 
 # Choix de la distribution
 
-Dans cette étude statistique nous allons analyser les résultats des fittings réalisés avec les trois méthodes détaillées. Les distributions utilisées seront:
-- Distribution normale
-- Distribution gamma
-- Distribution log-norm
+Dans cette étude statistique, nous allons analyser les résultats des fittings réalisés selon les trois méthodes présentées précédemment. Les distributions utilisées seront les suivantes :
+- Distribution normale ;
+- Distribution gamma ;
+- Distribution log-normale.
 
-Maintenant nous allons montrer les résultats des fittings pour les données avec et sans filtre de pics de radon. Sur la légende y aura une distribution qui sera écrite en gras. Elle correspond à la meilleure des options, sous un des critères (dans ce cas, le $BIC$), sur les trois fittings essayées. Cela est fait pour avoir un point de repère dans chacun des graphiques mais on va aussi étudier les résultats par rapport au $AIC$.
+Nous allons maintenant présenter les résultats des fittings obtenus pour les données avec et sans application du filtre des pics de radon.
 
-## Résultats fitting avec filtre
+Dans chaque graphique, la légende mettra en évidence une distribution écrite en **gras**. Celle-ci correspond à la meilleure option selon l’un des critères d’évaluation (dans notre cas, le $BIC$) parmi les trois fittings testés. Cette représentation permet de disposer d’un point de référence pour chaque graphique. Nous analyserons également les résultats selon le critère $AIC$.
 
-Voici les résultats pour les données avec filtre:
+## Résultats du fitting avec filtre
+
+Voici les résultats obtenus pour les données avec application du filtre :
 
 Quantile 0:
 ![[dist_yB_3eval_quantile_0 2.png]]
@@ -400,16 +442,17 @@ Et les résultats statistiques correspondants avec nos mesures:
 
 ## Analyse des résultats
 
-Nous pouvons voir dans les deux études `log-norm` l'emporte clairement pour le fitting simple et `gamma`l'emporte pour le fitting double. Si on regarde les moyennes de BIC pour chaque méthode et distribution, on remarque que pour la base de données filtrée, les méthodes simple manuelle et double sont tout aussi legitimes; alors que pour la base de données non filtrée, il y a quand-même un grand écart entre les résultats du meilleur fitting simple et le meilleur fitting double. Cela dit, on va faire les calculs pour les deux méthodes dans les deux cas. 
+Nous pouvons observer que, dans les deux études, la distribution `log-norm` s’impose clairement pour le fitting simple, tandis que la distribution `gamma` obtient les meilleurs résultats pour le fitting double.
 
+En analysant les moyennes des scores BIC pour chaque méthode et chaque distribution, on remarque que, pour la base de données filtrée, les méthodes **simple manuelle** et **double** sont toutes deux pertinentes. En revanche, pour la base de données non filtrée, un écart important apparaît entre les résultats du meilleur fitting simple et ceux du meilleur fitting double.
+
+Malgré cette différence, nous réaliserons les calculs selon les deux méthodes dans les deux configurations afin de pouvoir comparer leurs résultats.
 
 # Calcul des paramètres
 
 Voici les résultats des régressions linéaires et les équations obtenues pour chaque paramètre.
-
 ## Données avec filtre
 ### Méthode simple: `log-norm`
-
 #### Équations obtenues
 $$\mu(y_A) = 4.0064 + 0.4681y_A$$
 $$ \sigma(y_A) = 0.4497 + 1.2558\sqrt{y_A}$$
